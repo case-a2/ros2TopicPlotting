@@ -23,6 +23,7 @@ read_msg <- function(package_name, msg_type) {
 
   # Variable to indicate if we are inside the header section
   inside_header <- FALSE
+  current_header <- NULL
 
   # Parse each line of the .msg file
   for (line in msg_content) {
@@ -47,16 +48,16 @@ read_msg <- function(package_name, msg_type) {
           # Handle header separately
           inside_header <- TRUE
           current_header <- header
-        } else if (startsWith(field, "geometry_msgs/") || startsWith(field, "std_msgs/")) {
-          # Process fields from geometry_msgs and std_msgs
-          data_fields[[field_name]] <- as.list(as.numeric(values))
         } else if (inside_header) {
           # Process nested structures within the header
-          current_header[[field_name]] <- as.list(as.numeric(values))
+          current_header[[field_name]] <- as.list((values))
+        } else if (startsWith(field, "geometry_msgs/") || startsWith(field, "std_msgs/")) {
+          # Process fields from geometry_msgs and std_msgs
+          data_fields[[field_name]] <- as.list((values))
         } else {
           # Process other field types
           if (length(values) > 1) {
-            data_fields[[field_name]] <- as.list(as.numeric(values))
+            data_fields[[field_name]] <- as.list((values))
           } else {
             data_fields[[field_name]] <- values
           }
