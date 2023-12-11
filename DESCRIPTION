@@ -1,0 +1,13 @@
+Package: ros2TopicPlotting
+Title: Parses ROS 2 bag files to plot from the /joint_states topic (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person("Case", "Ashton", , "case@tamu.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: What the package does (one paragraph).
+License: `use_gpl3_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+
+
