@@ -26,7 +26,7 @@
 #' data_frame_JTCS <- format_msg_csv("ur3_move_two", "ur_controller_state")
 
 
-.format_msg_csv <- function(bag_name = NULL, topic_name = NULL) {
+format_msg_csv <- function(bag_name = NULL, topic_name = NULL) {
   # If using the function, the package name and msg type can be extracted from the file
   if (is.null(topic_name) | is.null(bag_name)) {
     print("No topic or bag provided, proceeding with Joint States message")
