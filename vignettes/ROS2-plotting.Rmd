@@ -1,0 +1,19 @@
+---
+title: "Package for plotting joint_states"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Package for plotting joint_states}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ros2TopicPlotting)
+```
