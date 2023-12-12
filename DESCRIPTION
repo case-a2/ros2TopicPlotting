@@ -11,15 +11,12 @@ RoxygenNote: 7.2.3
 Depends: 
     R (>= 3.5.0),
     RSQLite,
-    ggplot2,
-    dplyr,
-    rgl
+    rgl,
+    Rcpp,
+    DLL
 Imports: 
     dplyr,
-    ggplot2,
-    RSQLite,
-    rgl,
-    dplyr
+    ggplot2
 Suggests: 
     knitr,
     rmarkdown,

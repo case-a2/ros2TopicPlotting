@@ -46,7 +46,7 @@ format_msg_csv <- function(bag_name = NULL, topic_name = NULL) {
   name = csv_data[4:9]
 
   if (topic_name == "joint_states") {
-    # Manually assign columns to match the JointState message declaration (see src/sensor_msgs/msg/JointState.msg)
+    # Manually assign columns to match the JointState message declaration (see vignettes/sensor_msgs/msg/JointState.msg)
     csv_target_range <- list(
       position = csv_data[10:15],
       velocity = csv_data[16:21],
@@ -55,7 +55,7 @@ format_msg_csv <- function(bag_name = NULL, topic_name = NULL) {
   }
   if (topic_name == "ur_controller_state") {
     # Manually assign columns to match the JointTrajectoryControllerState message declaration
-    # (see src/control_msgs/msg/JointTrajectoryControllerState)
+    # (see vignettes/control_msgs/msg/JointTrajectoryControllerState)
 
     # Isolated error[], actual[], & desired[] positions
     csv_target_range <- list(
