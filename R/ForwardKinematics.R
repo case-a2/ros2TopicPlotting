@@ -1,6 +1,6 @@
 ## Function to perform forward kinematics on the UR3 robot arm, with the values obtained from the CSV file in the ros2 bag recording
 
-source("R/format_msg_csv.R")
+#source("R/format_msg_csv.R")
 # Update the joint values and calculate the end-effector position
 
 #' Forward Kinematics for UR3 Robot Arm
