@@ -2,10 +2,34 @@
 # To add message libraries, copy the specific <name_of_message>/msg directory from /opt/ros/$ROS-DISTRO/share
 
 # Included in this package are sensor_msgs/msg, std_msgs/msg, and geometry_msgs/msg
+# install.packages(c("dbplyr", "RSQlite", "yaml"))
 
+#### TESTS ####
+library(RSQLite)
+sqlite <- dbDriver("SQLite")
+
+
+bag_name <- "subset"
+file_path_bag <- file.path("vignettes", bag_name, paste0(bag_name, "_0.db3"))
+
+db_info <- dbGetInfo(dbConnect(sqlite, file_path_bag))
+sql_conn <- dbConnect(RSQLite::SQLite(), db_info[["dbname"]])
+
+query <- dbGetQuery(sql_conn, "SELECT * FROM topics")
+print(query)
+
+query_pose <- dbGetQuery(sql_conn, "SELECT * FROM messages WHERE topic_id = 1")
+query_cmd_vel <- dbGetQuery(sql_conn, "SELECT * FROM messages WHERE topic_id = 2")
+
+dbDisconnect(sql_conn)
+
+####
 
 read_msg <- function(package_name, msg_type) {
   # read content from file path
+
+
+  ## If using the read_metadata_yaml function, the package name and msg type can be extracted from the metadata.yaml file
   file_path <- file.path("src", package_name, "msg", paste0(msg_type, ".msg"))
 
   # check if the file exists
