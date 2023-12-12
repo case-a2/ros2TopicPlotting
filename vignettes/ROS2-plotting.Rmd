@@ -6,6 +6,15 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+# Introduction
+R as a programming language to interpret a ROS 2 file recording of a robotic manipulator motion. To do this, it utilizes ROS 2's bag feature, which can record and playback recorded topics in the same time as they were executed originally, to better track and troubleshoot robotic development. This package is designed to take the recorded bag file and parse it into a usable format for R, and then plot the data in a way that is easy to interpret and understand.
+
+# Installation
+Install via github
+```R
+remotes::install_github("case-a2/ros2TopicPlotting")
+```
+
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
