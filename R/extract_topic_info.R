@@ -2,12 +2,20 @@
 
 # Input: .db3 file generated from a ROS 2 bag function
 
-# Output: A list of the topic names and message types
-library(RSQLite)
-source()
+# Cycles through list of topics and provides the data frame format for relavant data
 
-extract_topic_info <- function(bag_name) {
+
+#library(RSQLite)
+
+#source("format_msg_csv.R")
+
+extract_topic_info <- function(bag_name = NULL) {
   sqlite <- dbDriver("SQLite")
+
+  if (is.null(topic_name) | is.null(bag_name)) {
+    print("No bag provided, proceeding with Joint States message")
+    bag_name <- "ur3_move"
+  }
 
   ## Connect to bag file to retrieve topic information
   file_path_bag <- file.path("vignettes", bag_name, paste0(bag_name, "_0.db3"))
@@ -25,23 +33,29 @@ extract_topic_info <- function(bag_name) {
     type = type
   )
 
+
   # Find the number of topics in the bag file
   num_topics <- length(topic_information$name)
 
+  output_data_frame <- list()
+
   # Loops through the CSV files associated with the bag file
   for (i in num_topics) {
-    # send to csv function
+    # Pick a topic
     topic_name <- topic_information$name[[1]][i]
-    topic_type <- topic_information$type[[1]][i]
+    print(paste0("Printing: ", topic_name))
 
-    csv_msg_format(bag_name, topic_name, topic_type)
+    # Send topic to csv_msg_format function
+    output_data_frame[[i]] <- format_msg_csv(bag_name, topic_name)
+
+    # Write the output to a  file
+
   }
 
-
+  # Close the db connection
   dbDisconnect(sql_conn)
 
-  # maybe export the new table you made?
-  return(topic_information)
+  return(output_data_frame)
 }
 
 # Example usage:
