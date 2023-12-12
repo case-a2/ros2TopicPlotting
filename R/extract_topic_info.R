@@ -40,6 +40,7 @@ extract_topic_info <- function(bag_name = NULL) {
 
   name = dbGetQuery(sql_conn, "SELECT name FROM topics")
   type = dbGetQuery(sql_conn, "SELECT type FROM topics")
+  dbDisconnect(sql_conn)
 
   # Pull the topic name and message type into a list
   topic_information <- list(
@@ -67,7 +68,6 @@ extract_topic_info <- function(bag_name = NULL) {
   }
 
   # Close the db connection
-  dbDisconnect(sql_conn)
 
   return(output_data_frame)
 }

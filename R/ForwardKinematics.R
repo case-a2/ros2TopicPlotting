@@ -5,7 +5,7 @@ source("R/format_msg_csv.R")
 
 #' Forward Kinematics for UR3 Robot Arm
 #'
-#' @param selected_data
+#' @param selected_data - The data frame of joint values returned from a topic
 #' @param time_interval
 #'
 #' @return A 3D plot of the end effector trajectory
@@ -17,17 +17,6 @@ source("R/format_msg_csv.R")
 #'
 update_plot <- function(selected_data, time_interval = 500) {
   num_samples <- nrow(selected_data)
-
-  end_effector_positions <- list(
-    data.frame(x = c(0, 1, 2), y = c(0, 1, 2), z = c(0, 1, 2)),
-    data.frame(x = c(2, 3, 4), y = c(2, 3, 4), z = c(2, 3, 4)),
-    data.frame(x = c(4, 5, 6), y = c(4, 5, 6), z = c(4, 5, 6))
-  )
-
-  # Initialize 3D plot
-  # open3d()
-  # rgl.postscript("animation.gif", fmt = "gif", movie = TRUE)
-  # rglwidget()
 
   # Create an empty plot
   plot3d(NULL, xlim = c(0, 7), ylim = c(0, 7), zlim = c(0, 7), main = "End Effector Trajectory")
@@ -71,15 +60,18 @@ update_plot <- function(selected_data, time_interval = 500) {
   }
 }
 
-#' Title
+#' Perform and plot iterations of forward kinematics
 #'
 #' @param joint_values
 #'
-#' @return
-#' @export position = 1x3 end_effector_position vector, orientation = 1x3 end_effector_orientation vector
+#' @return A list containing the end-effector position and orientation  position -
+#' 1x3 end_effector_position vector, orientation = 1x3 end_effector_orientation vector
+#' @export
 #'
 #' @examples
-ur3_forward_kinematics <- function(joint_angles) {
+#' joint_values <- c(0, 0, 0, 0, 0, 0)
+#' ur3_forward_kinematics(joint_values)
+.ur3_forward_kinematics <- function(joint_angles) {
 
   # UR3 kinematic parameters
   d1 <- 0.1519
@@ -137,8 +129,10 @@ ur3_forward_kinematics <- function(joint_angles) {
 #' @export
 #'
 #' @examples
+#' R <- matrix(c(0.999999999999999, 0, 0, 0, 0.999999999999999, 0, 0, 0, 1), nrow = 3, byrow = TRUE)
+#' rotationMatrixToQuaternion(R)
 #'
-rotationMatrixToQuaternion <- function(R) {
+.rotationMatrixToQuaternion <- function(R) {
   qw <- sqrt(1 + R[1, 1] + R[2, 2] + R[3, 3]) / 2
   qx <- (R[3, 2] - R[2, 3]) / (4 * qw)
   qy <- (R[1, 3] - R[3, 1]) / (4 * qw)
