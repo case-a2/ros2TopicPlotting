@@ -5,15 +5,18 @@
 # Cycles through list of topics and provides the data frame format for relavant data
 
 
-#library(RSQLite)
-
-#source("format_msg_csv.R")
+source("R/format_msg_csv.R")
 
 #' Extract the topic information from the bag file and parse all the topics through the format_msg_csv function, generating a list of usable data frames
 #'
 #' @param bag_name - The name of the bag file recorded by ROS2, defaults to ur3_move, which is included in the vignettes folder
 #'
-#' @return output_data_frame - A list of data frames containing the timestamp, sequence number, and joint information relevant to the topic recorded
+#' @return A list with data frames of recorded topic information
+#' \item{output_data_frame[joint_states]}
+#' \item{joint_states topic}{Position, velocity, and effort values for 6-DOF robotic manipulator.}
+#' \item{output_data_frame[ur_controller_state]}{Error, desired, and actual position values for 6-DOF robotic manipulator.}
+#' \item{ur_controller_state topic}{Error, desired, and actual position values for 6-DOF robotic manipulator.}
+#'
 #' @export
 #'
 #' @examples
