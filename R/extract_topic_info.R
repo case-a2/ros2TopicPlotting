@@ -9,10 +9,21 @@
 
 #source("format_msg_csv.R")
 
+#' Extract the topic information from the bag file and parse all the topics through the format_msg_csv function, generating a list of usable data frames
+#'
+#' @param bag_name - The name of the bag file recorded by ROS2, defaults to ur3_move, which is included in the vignettes folder
+#'
+#' @return output_data_frame - A list of data frames containing the timestamp, sequence number, and joint information relevant to the topic recorded
+#' @export
+#'
+#' @examples
+#' extract_topic_info("ur3_move")
+#' extract_topic_info("ur3_move_two")
+#'
 extract_topic_info <- function(bag_name = NULL) {
   sqlite <- dbDriver("SQLite")
 
-  if (is.null(topic_name) | is.null(bag_name)) {
+  if (is.null(bag_name)) {
     print("No bag provided, proceeding with Joint States message")
     bag_name <- "ur3_move"
   }
