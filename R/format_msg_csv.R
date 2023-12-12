@@ -8,7 +8,20 @@
 ## Function for parsing the message file that is being used
 # To add message libraries, copy the specific <name_of_message>/msg directory from /opt/ros/$ROS-DISTRO/share
 
-# Included in this package are sensor_msgs/msg, std_msgs/msg, geometry_msgs/msg, and control_msgs/msg
+# Included in this package are the definition files (located in src) for sensor_msgs/msg, std_msgs/msg, geometry_msgs/msg, and control_msgs/msg
+
+#' Format the echoed message data to a data frame to be used for plotting
+#'
+#' @param bag_name - The name of the bag file recorded by ROS2, defaults to ur3_move, which is included in the vignettes folder
+#' @param topic_name - The name of the topic that was recorded, defaults to joint_states. Messages used for the topics are included in the src folder
+#'
+#' @return joint_data_frame - A data frame containing the timestamp, sequence number, and the position, velocity, and effort of the joints
+#' @export
+#'
+#' @examples
+#' data_frame_JS <- format_msg_csv("ur3_move", "joint_states")
+#' data_frame_JTCS <- format_msg_csv("ur3_move_two", "ur_controller_state")
+
 
 format_msg_csv <- function(bag_name = NULL, topic_name = NULL) {
   # If using the function, the package name and msg type can be extracted from the file
@@ -68,8 +81,7 @@ format_msg_csv <- function(bag_name = NULL, topic_name = NULL) {
   return(joint_data_frame)
 }
 
-# Example usage:
-data_frame_JS <- format_msg_csv("ur3_move", "joint_states")
+
 
 
 
