@@ -2,12 +2,11 @@ Package: ros2TopicPlotting
 Title: Parses ROS 2 bag files to plot from the /joint_states topic (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person("Case", "Ashton", , "case@tamu.edu", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person("Case", "Ashton", , "case@tamu.edu", role = c("aut", "cre"))
+Description: A package to parse Robot Operating System (ROS) 2 bag files to plot the end-effector position in 3-dimensional space. This package relies on using a Universal Robot, as its forward kinematics is done using UR3 values, and joint positions from the /joint_states topic. Additionally the /ur_controller/state topic is included to plot the error of the real robot position and the desired robot postion. This package is intended to be used with a ROS 2 bag file and a CSV file monitoring the topics recorded in the bag file. The CSV file is generated as an intermediary, as R does not provide the necessary deserialization option for DDS messages. The ROS 2 bag file is utilized for the topic information, then targets corresponding CSV files related to the topics to isolate only the relavant information for better analysis.
 License: `use_gpl3_license()`
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-
+LinkingTo: Rcpp
 
