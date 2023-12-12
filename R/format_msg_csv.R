@@ -15,7 +15,10 @@
 #' @param bag_name - The name of the bag file recorded by ROS2, defaults to ur3_move, which is included in the vignettes folder
 #' @param topic_name - The name of the topic that was recorded, defaults to joint_states. Messages used for the topics are included in the src folder
 #'
-#' @return joint_data_frame - A data frame containing the timestamp, sequence number, and the position, velocity, and effort of the joints
+#' @return joint_data_frame - Data frame for a single topic ( 2 available topics )
+#' \item{[joint_states]} - {Position, velocity, and effort values for 6-DOF robotic manipulator.}
+#' \item{[ur_controller_state]} - {Error, desired, and actual position values for 6-DOF robotic manipulator.}
+#'
 #' @export
 #'
 #' @examples
